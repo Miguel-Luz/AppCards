@@ -1,5 +1,5 @@
-import 'package:call_1807/models/state.dart';
-import 'package:call_1807/utils/db_helper.dart';
+import '../models/state.dart';
+import '../utils/db_helper.dart';
 
 class AppStateRepository {
   final _table = 'appstate';

@@ -1,4 +1,5 @@
-import 'package:call_1807/models/car.dart';
+
+import '../models/car.dart';
 
 abstract class MockData {
   static List<Car> cars = [

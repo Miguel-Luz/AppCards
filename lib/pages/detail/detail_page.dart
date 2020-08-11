@@ -1,4 +1,4 @@
-import 'package:call_1807/models/car.dart';
+import 'package:appcards/services/cards_service.dart';
 import 'package:flutter/material.dart';
 
 class DetailPage extends StatefulWidget {
@@ -8,7 +8,7 @@ class DetailPage extends StatefulWidget {
 }
 
 class _DetailPageState extends State<DetailPage> {
-  Car _car;
+   List _car = [];
 
   @override
   void didChangeDependencies() {
@@ -21,7 +21,7 @@ class _DetailPageState extends State<DetailPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Detalhes do item: ${_car?.name ?? ''}',
+          'Detalhes do item: ',
         ),
         centerTitle: true,
       ),
@@ -31,13 +31,13 @@ class _DetailPageState extends State<DetailPage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Hero(
-              tag: 'car_${_car.name}',
+              tag: 'car_',
               child: Container(
                 color: Colors.white,
                 child: AspectRatio(
                   aspectRatio: 16 / 9,
                   child: FadeInImage(
-                    image: NetworkImage(_car?.url ?? ''),
+                    image: NetworkImage(_car ?? ''),
                     placeholder: AssetImage(
                       'assets/loading.gif',
                     ),
@@ -49,7 +49,7 @@ class _DetailPageState extends State<DetailPage> {
             Align(
               alignment: Alignment.centerRight,
               child: Hero(
-                tag: 'favorite_${_car.name}',
+                tag: 'favorite_${_car}',
                 child: Icon(
                   Icons.favorite,
                   size: 32,
@@ -59,11 +59,11 @@ class _DetailPageState extends State<DetailPage> {
             ),
             Divider(),
             Text(
-              _car?.name ?? '',
+              _car ?? '',
               style: Theme.of(context).textTheme.headline1,
             ),
             Text(
-              _car?.description ?? '',
+              _car ?? '',
               style: Theme.of(context).textTheme.headline5,
             ),
           ],

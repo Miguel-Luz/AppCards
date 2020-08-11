@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
-import 'package:call_1807/models/state.dart';
-import 'package:call_1807/services/app_state_repository.dart';
-import 'package:call_1807/utils/network_helper.dart';
+import '../models/state.dart';
+import '../services/app_state_repository.dart';
+import '../utils/network_helper.dart';
 
 class Result<T> {
   bool status;

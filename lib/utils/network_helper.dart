@@ -1,4 +1,4 @@
-import 'package:call_1807/models/state.dart';
+import '../models/state.dart';
 import 'package:dio/dio.dart';
 
 abstract class NetworkHelper {

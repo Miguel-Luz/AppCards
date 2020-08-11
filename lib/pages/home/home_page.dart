@@ -1,7 +1,7 @@
-import 'package:call_1807/controllers/auth_controller.dart';
-import 'package:call_1807/models/user.dart';
-import 'package:call_1807/pages/edit/edit_page.dart';
-import 'package:call_1807/pages/items/items_page.dart';
+import '../../controllers/auth_controller.dart';
+import '../../models/user.dart';
+import '../../pages/edit/edit_page.dart';
+import '../../pages/items/items_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';

@@ -1,6 +1,6 @@
-import 'package:call_1807/models/state.dart';
-import 'package:call_1807/services/app_state_repository.dart';
-import 'package:call_1807/services/login_service.dart';
+import '../models/state.dart';
+import '../services/app_state_repository.dart';
+import '../services/login_service.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 part 'auth_controller.g.dart';
