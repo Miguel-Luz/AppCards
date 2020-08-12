@@ -1,6 +1,6 @@
 import 'controllers/auth_controller.dart';
 import 'data/mock_data.dart';
-import 'pages/detail/detail_page.dart';
+//import 'pages/detail/detail_page.dart';
 import 'pages/edit/edit_page.dart';
 import 'pages/home/home_page.dart';
 import 'pages/items/items_page.dart';
@@ -51,7 +51,7 @@ class MyApp extends StatelessWidget {
             },
           );
         },
-        DetailPage.routeName: (context) => DetailPage(),
+      
         ItemsPage.routeName: (context) => Provider(
               create: (_) => MockData.cars,
               child: ItemsPage(),

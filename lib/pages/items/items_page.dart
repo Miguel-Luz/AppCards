@@ -1,5 +1,5 @@
 import 'package:appcards/models/card.dart';
-import '../../pages/detail/detail_page.dart';
+//import '../../pages/detail/detail_page.dart';
 import 'package:flutter/material.dart';
 import 'package:appcards/services/cards_service.dart';
 import 'package:provider/provider.dart';
@@ -27,8 +27,6 @@ void getAllCards() async {
 //_cards = await _handleCars.getAll();
 
 } */
-
-
 
   @override
   Widget build(BuildContext context) {
