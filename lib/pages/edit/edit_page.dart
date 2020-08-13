@@ -12,8 +12,6 @@ class EditPage extends StatefulWidget {
 
 class _EditPageState extends State<EditPage> {
 GlobalKey<FormState> _form = GlobalKey<FormState>();
-
-
 CardsController _handleCards;
 AppCard _card = AppCard();
   
@@ -79,10 +77,12 @@ AppCard _card = AppCard();
      _form.currentState.save();
    
    if(_card?.id == null ){
-     print(_card);
-       _handleCards.insertCard(_card);
+     _handleCards.insertCard(_card);
+     
+     Navigator.pop(context);
    }else{
       _handleCards.updateCard(_card);
+     
    }
   }
  }

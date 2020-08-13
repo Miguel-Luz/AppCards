@@ -21,16 +21,14 @@ abstract class _CardsControllerBase with Store {
 
 
 void deleteCard(int id){
-  _cardsService.delete(id);
+  _cardsService.delete(id).then((value) => setListCards());
 }
 
 void updateCard(AppCard card){
-   _cardsService.update(card);
+  _cardsService.update(card).then((value) => setListCards());
 }
 
 void insertCard(AppCard card){
-   _cardsService.insert(card);
-}
-
-
+   _cardsService.insert(card).then((value) => setListCards());
+ }
 }

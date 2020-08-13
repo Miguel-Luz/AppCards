@@ -15,7 +15,7 @@ class _ItemsPageState extends State<ItemsPage> {
   CardsController _handleCards;
 
   @override
-  void didChangeDependencies() async {
+  void didChangeDependencies() {
     super.didChangeDependencies();
     _handleCards = Provider.of<CardsController>(context);
     _handleCards.setListCards();
@@ -28,7 +28,6 @@ class _ItemsPageState extends State<ItemsPage> {
         title: Text('Itens'),
         centerTitle: true,
       ),
-
       body: Padding(
         padding: const EdgeInsets.all(8),
         child: Column(
@@ -45,17 +44,14 @@ class _ItemsPageState extends State<ItemsPage> {
                 );
               }),
             ),
-            
           ],
         ),
-        
       ),
-     floatingActionButton: new FloatingActionButton(
-          onPressed:() => Navigator.of(context).pushNamed(EditPage.routeName),
-          mini: false,
-          child: new Icon(Icons.add),
-    
-    ),
+      floatingActionButton: new FloatingActionButton(
+        onPressed: () => Navigator.of(context).pushNamed(EditPage.routeName),
+        mini: false,
+        child: new Icon(Icons.add),
+      ),
     );
   }
 }

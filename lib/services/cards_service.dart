@@ -34,7 +34,9 @@ try{
 Future<List<AppCard>> getById(int id) async {
 List<AppCard> retorno;
  try{ 
+  var _appData = await  _appStateRepository.getCurrent();
   var dio = Dio(BaseOptions(baseUrl:'https://api-cards-growdev.herokuapp.com'));
+  dio.options.headers["Authorization"] = 'Bearer ' + _appData.token;
   var resposta  = await dio.get('/cards/$id');
   if(resposta.statusCode >= 200 && resposta.statusCode < 300){
     if(resposta.data['error'] == null){
@@ -53,7 +55,9 @@ List<AppCard> retorno;
 Future<List<AppCard>> delete(int id) async {
   List<AppCard> retorno;
  try{ 
+  var _appData = await  _appStateRepository.getCurrent(); 
   var dio = Dio(BaseOptions(baseUrl:'https://api-cards-growdev.herokuapp.com'));
+  dio.options.headers["Authorization"] = 'Bearer ' + _appData.token;
   var resposta  = await dio.delete('/cards/$id');
   if(resposta.statusCode >= 200 && resposta.statusCode < 300){
     if(resposta.data is List){
@@ -72,8 +76,10 @@ Future<List<AppCard>> insert(AppCard card) async{
     List<AppCard> retorno;
     
     try{
+    var _appData = await  _appStateRepository.getCurrent(); 
     var dados = jsonEncode(card.toMap());
     var dio = Dio(BaseOptions(baseUrl:'https://api-cards-growdev.herokuapp.com'));
+    dio.options.headers["Authorization"] = 'Bearer ' + _appData.token;
     var resposta  = await dio.post('/cards',data: dados);
       if(resposta.statusCode >= 200 && resposta.statusCode < 300){
         if(resposta.data['error'] == null){

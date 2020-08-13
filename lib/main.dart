@@ -1,7 +1,5 @@
 import 'controllers/auth_controller.dart';
 import 'controllers/cards_controller.dart';
-import 'data/mock_data.dart';
-//import 'pages/detail/detail_page.dart';
 import 'pages/edit/edit_page.dart';
 import 'pages/home/home_page.dart';
 import 'pages/items/items_page.dart';
@@ -48,7 +46,10 @@ class MyApp extends StatelessWidget {
               if (!controller.isLogedIn) {
                 return LoginPage();
               }
-              return HomePage();
+              return  Provider(
+              create: (_) => CardsController(),
+              child: ItemsPage(),
+              );
             },
           );
         },
@@ -64,4 +65,13 @@ class MyApp extends StatelessWidget {
       },
     );
   }
+
+
+
+
+
+
+
+
+
 }
