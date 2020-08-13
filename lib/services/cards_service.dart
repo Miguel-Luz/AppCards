@@ -1,14 +1,20 @@
 import 'dart:convert';
-import 'package:appcards/models/Card.dart';
+import 'package:appcards/models/card.dart';
+import 'package:appcards/services/app_state_repository.dart';
 import 'package:dio/dio.dart';
 
 
 class CardsService {
 
 Future<List<AppCard>> getAll() async {
+final _appStateRepository = AppStateRepository();
 List<AppCard> retorno;
+
 try{
+    
+    var _appData = await  _appStateRepository.getCurrent();
     var dio = Dio(BaseOptions(baseUrl:'https://api-cards-growdev.herokuapp.com'));
+    dio.options.headers["Authorization"] = 'Bearer ' + _appData.token;
     var resposta  = await dio.get('/cards');
     if(resposta.statusCode >= 200 && resposta.statusCode < 300){
       List lista = resposta.data;
@@ -16,9 +22,9 @@ try{
       lista.forEach((element) => retorno.add(AppCard.fromMap(element)));     
     }
   } on DioError catch(e){
-    print('***Não foi possível chegar ao servidor.');
+    print('***Não foi possível chegar ao servidor. $e');
   }catch (e){
-    print('***Houve um problema no processamento.'); 
+    print('***Houve um problema no processamento. $e'); 
   }
   return retorno;
 }

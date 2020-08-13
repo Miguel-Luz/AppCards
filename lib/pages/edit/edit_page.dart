@@ -1,7 +1,5 @@
-import 'dart:io';
-
+import 'package:appcards/models/card.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 
 class EditPage extends StatefulWidget {
   static String routeName = '/edit';
@@ -10,24 +8,18 @@ class EditPage extends StatefulWidget {
 }
 
 class _EditPageState extends State<EditPage> {
-  final _imagePicker = ImagePicker();
-  File _file;
-
-  Future<void> _tirarFoto(ImageSource source) async {
-    var _pickedFile = await _imagePicker.getImage(
-      source: source,
-    );
-
-    if (_pickedFile != null) {
-      setState(() {
-        _file = File(_pickedFile.path);
-      });
-    }
-  }
-
+  var _form = GlobalKey<FormState>();
+  TextEditingController tituloController;
+  TextEditingController contentController;
+  
+  AppCard _card;
+  int _carTarget;
   @override
-  void dispose() {
-    super.dispose();
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _card = ModalRoute.of(context).settings.arguments;
+    tituloController = TextEditingController(text: _card.title);
+    contentController = TextEditingController(text: _card.content);
   }
 
   @override
@@ -41,47 +33,27 @@ class _EditPageState extends State<EditPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8),
-        child: Column(
-          children: <Widget>[
-            _file == null
-                ? Text(
-                    'Nenhuma foto encontrada',
-                  )
-                : FadeInImage(
-                    image: FileImage(_file),
-                    placeholder: AssetImage('assets/loading.gif'),
-                  ),
-            SizedBox(
-              height: 8,
-            ),
-            Row(
-              children: <Widget>[
-                Expanded(
-                  child: RaisedButton.icon(
-                    onPressed: () => _tirarFoto(
-                      ImageSource.camera,
+        child: Form(
+          key: _form,
+          child: Column(
+            children: <Widget>[
+              TextFormField(controller: tituloController),
+              TextFormField(controller: contentController,maxLines: null,
+    keyboardType: TextInputType.multiline,),
+              Row(children: <Widget>[
+                RaisedButton.icon(
+                    onPressed: () => _form.currentState.reset(),
+                    icon: Icon(Icons.cancel),
+                    label: Text('Cancelar'),
                     ),
-                    icon: Icon(Icons.camera_alt),
-                    label: Text('Tirar foto'),
-                  ),
-                ),
-                SizedBox(
-                  width: 8,
-                ),
-                Expanded(
-                  child: RaisedButton.icon(
-                    onPressed: () => _tirarFoto(
-                      ImageSource.gallery,
-                    ),
-                    icon: Icon(
-                      Icons.photo_library,
-                    ),
-                    label: Text('Selecionar foto'),
-                  ),
-                ),
-              ],
-            )
-          ],
+                RaisedButton.icon(
+                  onPressed: null,
+                  icon: Icon(Icons.update),
+                  label: Text('Atualizar'),
+                )
+              ]),
+            ],
+          ),
         ),
       ),
     );

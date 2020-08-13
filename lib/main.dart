@@ -1,4 +1,5 @@
 import 'controllers/auth_controller.dart';
+import 'controllers/cards_controller.dart';
 import 'data/mock_data.dart';
 //import 'pages/detail/detail_page.dart';
 import 'pages/edit/edit_page.dart';
@@ -53,7 +54,7 @@ class MyApp extends StatelessWidget {
         },
       
         ItemsPage.routeName: (context) => Provider(
-              create: (_) => MockData.cars,
+              create: (_) => CardsController(),
               child: ItemsPage(),
             ),
         EditPage.routeName: (context) => EditPage(),

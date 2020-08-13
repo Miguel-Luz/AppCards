@@ -1,9 +1,8 @@
-import 'package:appcards/models/card.dart';
-//import '../../pages/detail/detail_page.dart';
+import 'package:appcards/controllers/cards_controller.dart';
+import 'package:appcards/pages/items/componente_itens.dart';
 import 'package:flutter/material.dart';
-import 'package:appcards/services/cards_service.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
-
 
 class ItemsPage extends StatefulWidget {
   static String routeName = '/items';
@@ -12,25 +11,18 @@ class ItemsPage extends StatefulWidget {
 }
 
 class _ItemsPageState extends State<ItemsPage> {
-  List<AppCard> _cards = [];
-  CardsService _handleCars;
-   
+  CardsController _handleCards;
+
   @override
-  void didChangeDependencies() {
+  void didChangeDependencies() async {
     super.didChangeDependencies();
-    _handleCars = Provider.of<CardsService>(context);
-   //_cards = _handleCars.getAll();
+    _handleCards = Provider.of<CardsController>(context);
+    _handleCards.setCards();
   }
-
-/* 
-void getAllCards() async {
-//_cards = await _handleCars.getAll();
-
-} */
 
   @override
   Widget build(BuildContext context) {
-    print(_handleCars.getAll());
+  
     return Scaffold(
       appBar: AppBar(
         title: Text('Itens'),
@@ -38,9 +30,17 @@ void getAllCards() async {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8),
-        child: Text('dqdqdw'),
-        ),
-      );
-    
+        child: Observer(builder: (_) {
+          return ListView.builder(
+            itemCount: _handleCards.cards.length,
+            itemBuilder: (context, index) {
+              return ListTile(
+                title: ComponentCard(item: _handleCards.cards[index]),
+              );
+            },
+          );
+        }),
+      ),
+    );
   }
 }
