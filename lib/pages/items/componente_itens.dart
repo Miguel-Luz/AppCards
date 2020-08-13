@@ -24,7 +24,6 @@ class _ComponentCardState extends State<ComponentCard> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      
       child: Container(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -39,6 +38,20 @@ class _ComponentCardState extends State<ComponentCard> {
               height: 4.0,
             ),
             Text(widget.item.content),
+            ButtonBar(
+              children: <Widget>[
+                FlatButton.icon(
+                  icon: Icon(Icons.edit),
+                  label: Text('Editar'),
+                  onPressed: () => edit(widget.item, context),
+                ),
+                FlatButton.icon(
+                  icon: Icon(Icons.delete),
+                  label: Text('Excluir'),
+                  onPressed: () => delete(widget.item),
+                ),
+              ],
+            ),
           ],
         ),
         decoration: BoxDecoration(
