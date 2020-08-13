@@ -1,5 +1,8 @@
+import 'package:appcards/controllers/cards_controller.dart';
 import 'package:appcards/models/card.dart';
+import 'package:appcards/utils/validation.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class EditPage extends StatefulWidget {
   static String routeName = '/edit';
@@ -8,18 +11,17 @@ class EditPage extends StatefulWidget {
 }
 
 class _EditPageState extends State<EditPage> {
-  var _form = GlobalKey<FormState>();
-  TextEditingController tituloController;
-  TextEditingController contentController;
+GlobalKey<FormState> _form = GlobalKey<FormState>();
+
+
+CardsController _handleCards;
+AppCard _card = AppCard();
   
-  AppCard _card;
-  int _carTarget;
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _card = ModalRoute.of(context).settings.arguments;
-    tituloController = TextEditingController(text: _card.title);
-    contentController = TextEditingController(text: _card.content);
+    _card = ModalRoute.of(context).settings.arguments ?? _card;
+    _handleCards = Provider.of<CardsController>(context); 
   }
 
   @override
@@ -37,19 +39,31 @@ class _EditPageState extends State<EditPage> {
           key: _form,
           child: Column(
             children: <Widget>[
-              TextFormField(controller: tituloController),
-              TextFormField(controller: contentController,maxLines: null,
-    keyboardType: TextInputType.multiline,),
+              TextFormField(
+                initialValue: _card?.title,
+                
+                maxLines: 3,
+                validator:(value) => Validation.isRequired(value),
+                onSaved:(value) => _card?.title = value,
+              ),
+              TextFormField(
+                initialValue: _card?.content,
+               
+                maxLines: null,
+                keyboardType: TextInputType.multiline,
+                validator:(value) => Validation.isRequired(value),
+                onSaved:(value) => _card?.content = value,
+              ),
               Row(children: <Widget>[
                 RaisedButton.icon(
-                    onPressed: () => _form.currentState.reset(),
-                    icon: Icon(Icons.cancel),
-                    label: Text('Cancelar'),
-                    ),
+                  onPressed: () => _form.currentState.reset(),
+                  icon: Icon(Icons.cancel),
+                  label: Text('Cancelar'),
+                ),
                 RaisedButton.icon(
-                  onPressed: null,
+                  onPressed:() => _onSaved(),
                   icon: Icon(Icons.update),
-                  label: Text('Atualizar'),
+                  label: Text('Salvar'),
                 )
               ]),
             ],
@@ -58,4 +72,25 @@ class _EditPageState extends State<EditPage> {
       ),
     );
   }
-}
+
+  
+ void _onSaved(){
+  if(_form.currentState.validate()){
+     _form.currentState.save();
+   
+   if(_card?.id == null ){
+     print(_card);
+       _handleCards.insertCard(_card);
+   }else{
+      _handleCards.updateCard(_card);
+   }
+  }
+ }
+ 
+ 
+ 
+ }
+
+
+
+ 

@@ -7,17 +7,30 @@ class CardsController = _CardsControllerBase with _$CardsController;
 
 abstract class _CardsControllerBase with Store {
   final _cardsService = CardsService();
-  
-    
-  
+   
   @observable
   List<AppCard> _cards = [];
   
   @action
-  void setCards(){
+  void setListCards(){
      _cardsService.getAll().then((value) => _cards = value);
    }
 
   @computed
   get cards =>_cards ;
+
+
+void deleteCard(int id){
+  _cardsService.delete(id);
+}
+
+void updateCard(AppCard card){
+   _cardsService.update(card);
+}
+
+void insertCard(AppCard card){
+   _cardsService.insert(card);
+}
+
+
 }

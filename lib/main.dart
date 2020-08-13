@@ -57,7 +57,10 @@ class MyApp extends StatelessWidget {
               create: (_) => CardsController(),
               child: ItemsPage(),
             ),
-        EditPage.routeName: (context) => EditPage(),
+        EditPage.routeName: (context) => Provider(
+              create: (_) => CardsController(),
+              child: EditPage(),
+        ),
       },
     );
   }

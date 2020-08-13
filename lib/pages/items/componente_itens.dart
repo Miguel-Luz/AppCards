@@ -17,28 +17,30 @@ class _ComponentCardState extends State<ComponentCard> {
 
   @override
   Widget build(BuildContext context) {
-    print(widget.item.id);
-    return Card(
+      return Card(
         child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
            ListTile(
             title: Text('${widget.item.title}'),
             subtitle: Text('${widget.item.content}'),
+            dense:true ,
           ),
           ButtonBar(
             children: <Widget>[
-              FlatButton(
-                child: const Text('BUY TICKETS'),
+              FlatButton.icon(
+                icon:Icon(Icons.edit),
+                label:  Text('Editar'),
                 onPressed:() => edit(widget.item,context),
               ),
-              FlatButton(
-                child: const Text('LISTEN'),
+              FlatButton.icon(
+                icon:Icon(Icons.delete),
+                label:  Text('Excluir'),
                 onPressed:() => delete(widget.item),
               ),
             ],
           ),
-        ],
+         ],
       ),
     );
    }

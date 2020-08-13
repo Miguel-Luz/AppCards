@@ -35,11 +35,11 @@ mixin _$CardsController on _CardsControllerBase, Store {
       ActionController(name: '_CardsControllerBase');
 
   @override
-  void setCards() {
+  void setListCards() {
     final _$actionInfo = _$_CardsControllerBaseActionController.startAction(
-        name: '_CardsControllerBase.setCards');
+        name: '_CardsControllerBase.setListCards');
     try {
-      return super.setCards();
+      return super.setListCards();
     } finally {
       _$_CardsControllerBaseActionController.endAction(_$actionInfo);
     }

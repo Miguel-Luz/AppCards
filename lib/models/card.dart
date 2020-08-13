@@ -4,7 +4,7 @@ int id;
 String title;
 String content;
 
-    AppCard(this.title,this.content,[this.id]);
+    AppCard([this.title,this.content,this.id]);
 
     AppCard.fromMap(Map<String,dynamic> map){
       id = map['id'];
