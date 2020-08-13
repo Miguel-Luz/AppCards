@@ -30,9 +30,7 @@ class MyApp extends StatelessWidget {
     final controller = Provider.of<AuthController>(context);
 
     return MaterialApp(
-      themeMode: ThemeMode.dark,
-      darkTheme: ThemeData.dark(),
-      theme: ThemeData.light(),
+      theme: setTehma(),
       initialRoute: HomePage.routeName,
       routes: {
         HomePage.routeName: (context) {
@@ -54,11 +52,7 @@ class MyApp extends StatelessWidget {
           );
         },
       
-        ItemsPage.routeName: (context) => Provider(
-              create: (_) => CardsController(),
-              child: ItemsPage(),
-            ),
-        EditPage.routeName: (context) => Provider(
+       EditPage.routeName: (context) => Provider(
               create: (_) => CardsController(),
               child: EditPage(),
         ),
@@ -68,7 +62,18 @@ class MyApp extends StatelessWidget {
 
 
 
-
+setTehma(){
+return  ThemeData(
+    primaryColor: Colors.indigo[900],
+    accentColor: const Color(0xff5E5E5E),  
+   
+    inputDecorationTheme: InputDecorationTheme(
+      border: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(5),
+      ),
+    ),                      
+  );
+}
 
 
 

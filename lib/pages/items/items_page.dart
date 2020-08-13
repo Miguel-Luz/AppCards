@@ -1,5 +1,6 @@
 import 'package:appcards/controllers/cards_controller.dart';
 import 'package:appcards/pages/edit/edit_page.dart';
+import 'package:appcards/pages/items/component_drawer.dart';
 import 'package:appcards/pages/items/componente_itens.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -24,6 +25,7 @@ class _ItemsPageState extends State<ItemsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: ComponenteDrawer(),
       appBar: AppBar(
         title: Text('Itens'),
         centerTitle: true,
@@ -36,7 +38,7 @@ class _ItemsPageState extends State<ItemsPage> {
               child: Observer(builder: (_) {
                 return ListView.builder(
                   itemCount: _handleCards.cards.length,
-                  itemBuilder: (context, index) {
+                  itemBuilder: (_, index) {
                     return ListTile(
                       title: ComponentCard(item: _handleCards.cards[index]),
                     );
@@ -48,7 +50,10 @@ class _ItemsPageState extends State<ItemsPage> {
         ),
       ),
       floatingActionButton: new FloatingActionButton(
-        onPressed: () => Navigator.of(context).pushNamed(EditPage.routeName),
+        onPressed: () async {
+          await Navigator.of(context).pushNamed(EditPage.routeName);
+          _handleCards.setListCards();
+        },
         mini: false,
         child: new Icon(Icons.add),
       ),

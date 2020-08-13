@@ -19,13 +19,13 @@ mixin _$CardsController on _CardsControllerBase, Store {
   final _$_cardsAtom = Atom(name: '_CardsControllerBase._cards');
 
   @override
-  List<AppCard> get _cards {
+  ObservableList<AppCard> get _cards {
     _$_cardsAtom.reportRead();
     return super._cards;
   }
 
   @override
-  set _cards(List<AppCard> value) {
+  set _cards(ObservableList<AppCard> value) {
     _$_cardsAtom.reportWrite(value, super._cards, () {
       super._cards = value;
     });

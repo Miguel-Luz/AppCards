@@ -11,15 +11,15 @@ class EditPage extends StatefulWidget {
 }
 
 class _EditPageState extends State<EditPage> {
-GlobalKey<FormState> _form = GlobalKey<FormState>();
-CardsController _handleCards;
-AppCard _card = AppCard();
-  
+  GlobalKey<FormState> _form = GlobalKey<FormState>();
+  CardsController _handleCards;
+  AppCard _card = AppCard();
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     _card = ModalRoute.of(context).settings.arguments ?? _card;
-    _handleCards = Provider.of<CardsController>(context); 
+    _handleCards = Provider.of<CardsController>(context);
   }
 
   @override
@@ -38,19 +38,19 @@ AppCard _card = AppCard();
           child: Column(
             children: <Widget>[
               TextFormField(
+                decoration: InputDecoration(labelText: 'Título'),
                 initialValue: _card?.title,
-                
-                maxLines: 3,
-                validator:(value) => Validation.isRequired(value),
-                onSaved:(value) => _card?.title = value,
+                maxLines: null,
+                validator: (value) => Validation.isRequired(value),
+                onSaved: (value) => _card?.title = value,
               ),
               TextFormField(
+                decoration: InputDecoration(labelText: 'Conteúdo'),
                 initialValue: _card?.content,
-               
                 maxLines: null,
                 keyboardType: TextInputType.multiline,
-                validator:(value) => Validation.isRequired(value),
-                onSaved:(value) => _card?.content = value,
+                validator: (value) => Validation.isRequired(value),
+                onSaved: (value) => _card?.content = value,
               ),
               Row(children: <Widget>[
                 RaisedButton.icon(
@@ -59,7 +59,7 @@ AppCard _card = AppCard();
                   label: Text('Cancelar'),
                 ),
                 RaisedButton.icon(
-                  onPressed:() => _onSaved(),
+                  onPressed: () => _onSaved(),
                   icon: Icon(Icons.update),
                   label: Text('Salvar'),
                 )
@@ -71,26 +71,15 @@ AppCard _card = AppCard();
     );
   }
 
-  
- void _onSaved(){
-  if(_form.currentState.validate()){
-     _form.currentState.save();
-   
-   if(_card?.id == null ){
-     _handleCards.insertCard(_card);
-     
-     Navigator.pop(context);
-   }else{
-      _handleCards.updateCard(_card);
-     
-   }
+  void _onSaved() {
+    if (_form.currentState.validate()) {
+      _form.currentState.save();
+
+      if (_card?.id == null) {
+        _handleCards.insertCard(_card);
+      } else {
+        _handleCards.updateCard(_card);
+      }
+    }
   }
- }
- 
- 
- 
- }
-
-
-
- 
+}

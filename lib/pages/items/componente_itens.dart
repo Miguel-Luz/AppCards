@@ -24,29 +24,29 @@ class _ComponentCardState extends State<ComponentCard> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          ListTile(
-            title: Text(widget.item.title),
-            subtitle: Text(widget.item.content),
-            dense: true,
-          ),
-          ButtonBar(
-            children: <Widget>[
-              FlatButton.icon(
-                icon: Icon(Icons.edit),
-                label: Text('Editar'),
-                onPressed: () => edit(widget.item, context),
+      
+      child: Container(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Text(
+              widget.item.title,
+              style: new TextStyle(
+                fontSize: 20.0,
               ),
-              FlatButton.icon(
-                icon: Icon(Icons.delete),
-                label: Text('Excluir'),
-                onPressed: () => delete(widget.item),
-              ),
-            ],
+            ),
+            Divider(
+              height: 4.0,
+            ),
+            Text(widget.item.content),
+          ],
+        ),
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: Colors.orange[800],
+            width: 1.0,
           ),
-        ],
+        ),
       ),
     );
   }
@@ -83,7 +83,8 @@ class _ComponentCardState extends State<ComponentCard> {
     );
   }
 
-  void edit(AppCard item, BuildContext ctx) {
-    Navigator.of(ctx).pushNamed(EditPage.routeName, arguments: item);
+  void edit(AppCard item, BuildContext ctx) async {
+    await Navigator.of(ctx).pushNamed(EditPage.routeName, arguments: item);
+    _handleCards.setListCards();
   }
 }

@@ -98,9 +98,9 @@ class _LoginPageState extends State<LoginPage> {
               SizedBox(
                 height: 8,
               ),
-              OutlineButton(
+              RaisedButton(
                 onPressed: _sigin,
-                child: Text('Sign in'),
+                child: Text('Entrar'),
               ),
             ],
           ),

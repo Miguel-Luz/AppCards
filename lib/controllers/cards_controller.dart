@@ -9,11 +9,11 @@ abstract class _CardsControllerBase with Store {
   final _cardsService = CardsService();
    
   @observable
-  List<AppCard> _cards = [];
+  ObservableList<AppCard> _cards = ObservableList.of([]);
   
   @action
   void setListCards(){
-     _cardsService.getAll().then((value) => _cards = value);
+     _cardsService.getAll().then((value) => _cards = value.asObservable());
    }
 
   @computed
